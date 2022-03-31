@@ -8,7 +8,7 @@ if len(sys.argv) != 2:
     raise ValueError("Please provide output directory")
 
 path = "frames/"
-files = os.listdir(path).sort()
+files = sorted(os.listdir(path))
 
 frame_num = 0
 for file in files:
