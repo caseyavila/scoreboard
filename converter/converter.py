@@ -30,4 +30,6 @@ for file in files:
             b = data[i + 2]
             if r + g + b != 0:
                 fout.write(str(x) + " " + str(y) + " " + str(r) + " " + str(g) + " " + str(b) + "\n") 
+        fout.close()
+        frame_num += 1
             
