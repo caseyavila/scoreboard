@@ -2,7 +2,7 @@ import os
 import sys
 from PIL import Image
 
-WIDTH = 5
+WIDTH = 64
 
 if len(sys.argv) != 2:
     raise ValueError("Please provide output directory")
