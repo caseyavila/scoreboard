@@ -26,8 +26,8 @@ static void InterruptHandler(int signo) {
 }
 
 static int usage(const char *progname) {
-    fprintf(stderr, "usage: %s\n", progname);
-    fprintf(stderr, "Display dye scoreboard.\n");
+    fprintf(stderr, "usage: <frame path>%s\n", progname);
+    fprintf(stderr, "Display a frame.\n");
     rgb_matrix::PrintMatrixFlags(stderr);
     return 1;
 }
@@ -69,16 +69,6 @@ static std::vector<pixel> parse_frame(std::string filename) {
     return pixels;
 }
 
-static std::vector<std::vector<pixel>> parse_all_frames(std::string directory) {
-    std::vector<std::vector<pixel>> all_frames;
-
-    for (int i = 0; std::filesystem::exists(directory + "frame" + std::to_string(i)); i++) {
-        all_frames.push_back(parse_frame(directory + "frame" + std::to_string(i)));
-    }
-
-    return all_frames;
-}
-
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_opt;
@@ -100,27 +90,16 @@ int main(int argc, char *argv[]) {
     bool running = true;
     bool update = true;
 
-    std::vector<std::vector<pixel>> ball_bounce_frames = parse_all_frames("../frames/ball-bounce/");
-    std::vector<std::vector<pixel>> water_frames = parse_all_frames("../frames/water/");
-    std::vector<pixel> snorlax_frame = parse_frame("../frames/snorlax");
-    std::vector<pixel> spd_frame = parse_frame("../frames/small-spd-frame");
-    unsigned int frame_index = 0;
+    std::vector<pixel> frame = parse_frame(argv[argc - 1]);
 
     while (!interrupt_received && running) {
         if (update) {
             canvas->Clear();
-            //for (pixel px : snorlax_frame) {
-            //    canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
-            //}
-            //for (pixel px : spd_frame) {
-            //    canvas->SetPixel(px.x, px.y, 100, 0, 0);
-            //}
-            for (pixel px : water_frames[frame_index]) {
+            for (pixel px : frame) {
                 canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
             }
-            frame_index = (frame_index + 1) % water_frames.size();
             canvas = matrix->SwapOnVSync(canvas);
-            usleep(100000);
+            update = false;  // Just render the frame once :)
         }
     }
 

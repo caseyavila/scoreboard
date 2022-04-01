@@ -26,8 +26,8 @@ static void InterruptHandler(int signo) {
 }
 
 static int usage(const char *progname) {
-    fprintf(stderr, "usage: %s\n", progname);
-    fprintf(stderr, "Display dye scoreboard.\n");
+    fprintf(stderr, "usage: %s\n <directory path> <delay in microseconds>", progname);
+    fprintf(stderr, "Display an animation of frames.\n");
     rgb_matrix::PrintMatrixFlags(stderr);
     return 1;
 }
@@ -100,27 +100,18 @@ int main(int argc, char *argv[]) {
     bool running = true;
     bool update = true;
 
-    std::vector<std::vector<pixel>> ball_bounce_frames = parse_all_frames("../frames/ball-bounce/");
-    std::vector<std::vector<pixel>> water_frames = parse_all_frames("../frames/water/");
-    std::vector<pixel> snorlax_frame = parse_frame("../frames/snorlax");
-    std::vector<pixel> spd_frame = parse_frame("../frames/small-spd-frame");
+    std::vector<std::vector<pixel>> animation = parse_all_frames(argv[argc - 2]);
     unsigned int frame_index = 0;
 
     while (!interrupt_received && running) {
         if (update) {
             canvas->Clear();
-            //for (pixel px : snorlax_frame) {
-            //    canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
-            //}
-            //for (pixel px : spd_frame) {
-            //    canvas->SetPixel(px.x, px.y, 100, 0, 0);
-            //}
-            for (pixel px : water_frames[frame_index]) {
+            for (pixel px : animation[frame_index]) {
                 canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
             }
-            frame_index = (frame_index + 1) % water_frames.size();
+            frame_index = (frame_index + 1) % animation.size();
             canvas = matrix->SwapOnVSync(canvas);
-            usleep(100000);
+            usleep(std::stoi(argv[argc - 1]));
         }
     }
 

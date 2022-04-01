@@ -1,7 +1,7 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter -std=c++17
 CXXFLAGS=$(CFLAGS)
-OBJECTS=dye.o
-BINARIES=dye
+OBJECTS=dye.o frame.o animation.o
+BINARIES=dye frame animation
 
 # Where our library resides. You mostly only need to change the
 # RGB_LIB_DISTRIBUTION, this is where the library is checked out.
@@ -18,6 +18,8 @@ $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
 dye : dye.o
+frame : frame.o
+animation : animation.o
 
 # All the binaries that have the same name as the object file.q
 % : %.o $(RGB_LIBRARY)
