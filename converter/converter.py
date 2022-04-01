@@ -28,7 +28,8 @@ for file in files:
             r = data[i]
             g = data[i + 1]
             b = data[i + 2]
-            if r + g + b != 0:
+            a = data[i + 3]
+            if r + g + b != 0 and a != 0:
                 fout.write(str(x) + " " + str(y) + " " + str(r) + " " + str(g) + " " + str(b) + "\n") 
         fout.close()
         frame_num += 1
