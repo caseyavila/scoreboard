@@ -1,0 +1,15 @@
+[Unit]
+Description=Dye scoreboard service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+WorkingDirectory=/home/pi/scoreboard/matrix/src
+ExecStart=/home/pi/scoreboard/matrix/src/dye --led-rows=32 --led-cols=64
+Sockets=dye.socket
+StandardInput=socket
+
+[Install]
+WantedBy=multi-user.target

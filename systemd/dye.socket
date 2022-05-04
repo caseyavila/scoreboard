@@ -1,0 +1,3 @@
+[Socket]
+ListenFIFO=%t/dye.stdin
+Service=dye.service
