@@ -1,6 +1,6 @@
 # scoreboard
 ### Todo:
-- [ ] Integrate animations
+- [x] Integrate animations
 - [x] Fix numbering
 - [ ] Switch sides
 - [ ] Win/lose cases
