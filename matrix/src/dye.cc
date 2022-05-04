@@ -5,6 +5,7 @@
 
 #include <unistd.h>
 #include <csignal>
+#include <iostream>
 
 using namespace rgb_matrix;
 
@@ -21,6 +22,17 @@ static int usage(const char *progname) {
     fprintf(stderr, "Display dye scoreboard.\n");
     rgb_matrix::PrintMatrixFlags(stderr);
     return 1;
+}
+
+void PlayAnimation(std::vector<std::vector<pixel>> animation, rgb_matrix::FrameCanvas* canvas, RGBMatrix* matrix) {
+    for (std::vector<pixel> frame : animation) {
+        canvas->Clear();
+        for (pixel px : frame) {
+            canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
+        }
+        canvas = matrix->SwapOnVSync(canvas);
+        usleep(100000);
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -84,6 +96,7 @@ int main(int argc, char *argv[]) {
             if (input == "reset") {
                 red_score = 0;
                 gold_score = 0;
+                PlayAnimation(water_frames, canvas, matrix);
             } else if (input == "radd") {
                 if (red_score < 12) {
                     red_score++;
