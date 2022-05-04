@@ -4,7 +4,7 @@
 - [x] Fix numbering
 - [ ] Switch sides
 - [ ] Win/lose cases
-- [ ] Commit website and service code
-- [ ] Website reloading
+- [X] Commit website and service code
+- [X] Website reloading
 - [ ] Website mobile formatting
 

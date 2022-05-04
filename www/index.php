@@ -3,22 +3,19 @@
         <title>ΣΦΔ</title>
     </head>
     <body>
+        <iframe name="hack" style="display:none;"></iframe>
         <h1>ΣΦΔ - ΒΝ</h1>
-    	<form action="index.php" method="post">
+    	<form action="index.php" method="post" target="hack">
              <input type="submit" name="reset" value="Reset"/>
         </form>
         <h2>Red</h2>
-    	<form action="index.php" method="post">
+    	<form action="index.php" method="post" target="hack">
              <input type="submit" name="radd" value="+1 Point"/>
-        </form>
-    	<form action="index.php" method="post">
              <input type="submit" name="rsub" value="-1 Point"/>
         </form>
         <h2>Gold</h2>
-    	<form action="index.php" method="post">
+    	<form action="index.php" method="post" target="hack">
              <input type="submit" name="gadd" value="+1 Point"/>
-        </form>
-    	<form action="index.php" method="post">
              <input type="submit" name="gsub" value="-1 Point"/>
         </form>
     </body>
