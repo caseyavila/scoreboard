@@ -98,29 +98,61 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, InterruptHandler);
 
     bool running = true;
-    bool update = true;
 
-    std::vector<std::vector<pixel>> ball_bounce_frames = parse_all_frames("../frames/ball-bounce/");
     std::vector<std::vector<pixel>> water_frames = parse_all_frames("../frames/water/");
-    std::vector<pixel> snorlax_frame = parse_frame("../frames/snorlax");
-    std::vector<pixel> spd_frame = parse_frame("../frames/small-spd-frame");
-    unsigned int frame_index = 0;
+    std::vector<std::vector<pixel>> number_frames = parse_all_frames("../frames/numbers/");
+    std::vector<pixel> layout_frame = parse_frame("../frames/layout");
+
+    int red_score = 0;
+    int gold_score = 0;
+
+    std::string input;
 
     while (!interrupt_received && running) {
-        if (update) {
-            canvas->Clear();
-            //for (pixel px : snorlax_frame) {
-            //    canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
-            //}
-            //for (pixel px : spd_frame) {
-            //    canvas->SetPixel(px.x, px.y, 100, 0, 0);
-            //}
-            for (pixel px : water_frames[frame_index]) {
-                canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
+        canvas->Clear();
+        // Set middle red and gold line
+        for (pixel px : layout_frame) {
+            canvas->SetPixel(px.x, px.y, px.red, px.green, px.blue);
+        }
+
+        // Offsets for positioning
+        int redx = 13;
+        int goldx = 45;
+        int y = 13;
+
+        // Make room for double digit numbers
+        if (red_score > 9) redx -= 4;
+        if (gold_score > 9) goldx -= 4;
+
+        // Set numbers
+        for (pixel px : number_frames[red_score]) {
+            canvas->SetPixel(px.x + redx, px.y + y, 255, 0, 0);
+        }
+        for (pixel px : number_frames[gold_score]) {
+            canvas->SetPixel(px.x + goldx, px.y + y, 255, 193, 7);
+        }
+
+        // Sync leds with buffer
+        canvas = matrix->SwapOnVSync(canvas);
+
+        // Get new input
+        if (std::getline(std::cin, input)) {
+            if (input == "reset") {
+                red_score = 0;
+                gold_score = 0;
+            } else if (input == "radd") {
+                red_score++;
+            } else if (input == "gadd") {
+                gold_score++;
+            } else if (input == "rsub") {
+                red_score--;
+            } else if (input == "gsub") {
+                gold_score--;
             }
-            frame_index = (frame_index + 1) % water_frames.size();
-            canvas = matrix->SwapOnVSync(canvas);
-            usleep(100000);
+        } else {
+            delete matrix;
+            printf("\n");
+            return 0;
         }
     }
 
