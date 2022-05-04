@@ -23,6 +23,8 @@ volatile bool interrupt_received = false;
 
 static void InterruptHandler(int signo) {
     interrupt_received = true;
+
+    exit(EXIT_FAILURE);
 }
 
 static int usage(const char *progname) {
@@ -141,13 +143,21 @@ int main(int argc, char *argv[]) {
                 red_score = 0;
                 gold_score = 0;
             } else if (input == "radd") {
-                red_score++;
+                if (red_score < 12) {
+                    red_score++;
+                }
             } else if (input == "gadd") {
-                gold_score++;
+                if (gold_score < 12) {
+                    gold_score++;
+                }
             } else if (input == "rsub") {
-                red_score--;
+                if (red_score > 0) {
+                    red_score--;
+                }
             } else if (input == "gsub") {
-                gold_score--;
+                if (gold_score > 0) {
+                    gold_score--;
+                }
             }
         } else {
             delete matrix;
