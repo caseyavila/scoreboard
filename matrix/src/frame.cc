@@ -4,12 +4,7 @@
 #include "media.h"
 
 #include <unistd.h>
-
 #include <csignal>
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <sstream>
 
 using namespace rgb_matrix;
 
