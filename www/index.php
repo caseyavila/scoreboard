@@ -1,6 +1,8 @@
 <html>
     <head>
         <title>ΣΦΔ</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <iframe name="hack" style="display:none;"></iframe>
@@ -10,13 +12,13 @@
         </form>
         <h2>Red</h2>
     	<form action="index.php" method="post" target="hack">
-             <input type="submit" name="radd" value="+1 Point"/>
-             <input type="submit" name="rsub" value="-1 Point"/>
+             <input type="submit" name="rsub" value="-1 Point" class="red"/>
+             <input type="submit" name="radd" value="+1 Point" class="red"/>
         </form>
         <h2>Gold</h2>
     	<form action="index.php" method="post" target="hack">
-             <input type="submit" name="gadd" value="+1 Point"/>
-             <input type="submit" name="gsub" value="-1 Point"/>
+             <input type="submit" name="gsub" value="-1 Point" class="gold"/>
+             <input type="submit" name="gadd" value="+1 Point" class="gold"/>
         </form>
     </body>
 </html>
