@@ -7,4 +7,5 @@
 - [X] Commit website and service code
 - [X] Website reloading
 - [X] Website mobile formatting
-
+- [ ] Converter string numbering
+- [ ] Use fonts for numbers (up to more than 12)
