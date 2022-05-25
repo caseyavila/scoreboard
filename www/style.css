@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    width: 45vw;
+    height: 20vh;
+}
+
+input.red {
+    background-color: red;
+}
+
+input.gold {
+    background-color: gold;
+}
