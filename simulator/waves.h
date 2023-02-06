@@ -20,6 +20,6 @@ public:
 protected:
     int mW, mH;
     cell* mBoard;
-    float mPropFac, mLifetime, mFadeFac;
+    float mSpawnOdds, mPropFac, mAgeLuminance, mLifetime, mFadeFac;
 };
 
