@@ -5,7 +5,7 @@
 #include "waves.h"
 
 Waves::Waves()
-    :mSpawnOdds(0.02f)
+    :mSpawnOdds(0.5f)
     ,mPropFac(0.01f)
     ,mAgeLuminance(255.0f) // could be int
     ,mLifetime(50.0f)
@@ -45,7 +45,7 @@ void Waves::Calculate() { // override
         float randY = std::rand() % 32;
         // set cell to random color
         GetCell(randX, randY)->r = std::rand() % 255;
-        GetCell(randX, randY)->g = std::rand() % 255;
+        // GetCell(randX, randY)->g = std::rand() % 255;
         GetCell(randX, randY)->b = std::rand() % 255;
     }
 
