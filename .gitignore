@@ -6,6 +6,7 @@
 dye
 frame
 animation
+run_waves
 converter/frames
 converter/output
 draw-tool/__pycache__
