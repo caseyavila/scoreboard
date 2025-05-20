@@ -11,6 +11,7 @@
         <h1>ΣΦΔ - ΒΝ</h1>
     	<form action="index.php" method="post" target="hack">
              <input type="submit" name="reset" value="Reset"/>
+             <input type="submit" name="switch" value="Switch"/>
         </form>
         <h2>Red</h2>
     	<form action="index.php" method="post" target="hack">
@@ -31,6 +32,8 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['reset'])) {
             fwrite($input, "reset\n");
+        } else if (isset($_POST['switch'])) {
+            fwrite($input, "switch\n");
         } else if (isset($_POST['radd'])) {
             fwrite($input, "radd\n");
         } else if (isset($_POST['gadd'])) {
