@@ -1,3 +1,4 @@
 Website code located in /var/www/html
 
-To be used in conjunction with apache2
+To be used in conjunction with apache2. Install libapache2-mod-php for PHP
+support.
