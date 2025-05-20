@@ -22,9 +22,9 @@ frame : frame.o media.o
 animation : animation.o media.o
 run_waves: run_waves.o waves.o
 
-# All the binaries that have the same name as the object file.q
+# All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)
-	$(CXX) $< waves.o media.o -o $@ $(LDFLAGS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 %.o : %.cc
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
